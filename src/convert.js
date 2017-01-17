@@ -5,7 +5,7 @@
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-const uuid = require("uuid");
+const uuid = require('./uuid');
 const spawn = require('child_process').spawn;
 
 const output = fs.createWriteStream('./stdout.log');
@@ -89,7 +89,7 @@ function convertStream(fileSteam, format) {
 }
 
 function createTempFile(ext) {
-    let fileName = uuid.v4();
+    let fileName = uuid();
     if (ext) {
         fileName += `.${ext}`;
     }

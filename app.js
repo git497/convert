@@ -1,34 +1,16 @@
 /**
- * Created by Dion on 2017/1/16.
+ * Created by Dion on 2017/1/17.
  */
+
 const restify = require('restify');
-const socketio = require('socket.io');
+const ws = require('./src/websocket');
+const router = require('./src/router');
 
-const server = restify.createServer();
-const io = socketio.listen(server);
+let server = restify.createServer();
 
-server.get('/', function indexHTML(req, res, next) {
-    fs.readFile(__dirname + '/index.html', function (err, data) {
-        if (err) {
-            next(err);
-            return;
-        }
+ws(server);
+router(server);
 
-        res.setHeader('Content-Type', 'text/html');
-        res.writeHead(200);
-        res.end(data);
-        next();
-    });
-});
-
-
-io.sockets.on('connection', function (socket) {
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
-        console.log(data);
-    });
-});
-
-server.listen(8080, function () {
+server.listen(3000, () => {
     console.log('socket.io server listening at %s', server.url);
 });

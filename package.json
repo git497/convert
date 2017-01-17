@@ -4,6 +4,8 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "level": "^1.5.0",
+    "level-jobs": "^0.6.0",
     "restify": "^4.3.0",
     "socket.io": "^1.7.2",
     "uuid": "^3.0.1"
