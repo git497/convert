@@ -164,6 +164,4 @@ tags
 out
 gen
 
-
-db/*
-logs/*
+db
