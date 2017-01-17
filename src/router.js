@@ -6,6 +6,7 @@ const _ = require('lodash');
 const job = require('./job');
 const repo = require('./repo');
 const uuid = require('./uuid');
+const logger = require('./log');
 
 module.exports = server => {
 
@@ -23,6 +24,8 @@ module.exports = server => {
             type: file.type,
             path: file.path
         });
+
+        logger.info(data);
 
         return repo.put(`${key}_info`, data)
             .then(() => job.push(data))
