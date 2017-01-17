@@ -6,11 +6,14 @@
   "dependencies": {
     "level": "^1.5.0",
     "level-jobs": "^0.6.0",
+    "lodash": "^4.17.4",
     "restify": "^4.3.0",
     "socket.io": "^1.7.2",
     "uuid": "^3.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "form-data": "^2.1.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

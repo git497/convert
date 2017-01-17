@@ -33,12 +33,12 @@ function convertFile(file, options) {
     options = options || {};
     options.to = options.to || 'pdf';
     options.ext = options.ext || options.to;
-    options.fileName = options.fileName || createTempFile(options.ext);
+    options.name = options.name || createTempFile(options.ext);
     let params = [];
     if (options.format === 'spreadsheet') {
         params = ['-d', 'spreadsheet'];
     }
-    params.append(['-f', options.to, '-o', options.fileName, file]) ;
+    params.append(['-f', options.to, '-o', options.name, file]) ;
     logger.info(`unoconv output file ${outputFile}`);
     let unoconv = spawn('unoconv', params);
 
