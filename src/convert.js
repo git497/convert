@@ -6,11 +6,8 @@ const path = require('path');
 const os = require('os');
 const fs = require('fs');
 const uuid = require('./uuid');
+const logger = require('./log');
 const spawn = require('child_process').spawn;
-
-const output = fs.createWriteStream('./stdout.log');
-const errorOutput = fs.createWriteStream('./stderr.log');
-const logger = new Console(output, errorOutput);
 
 module.exports = {
     init,

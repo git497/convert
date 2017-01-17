@@ -12,7 +12,7 @@ const uuid = require('./uuid');
 const convert = require('./convert');
 const repo = require('./repo');
 
-let db_queue = level('./db_queue');
+let db_queue = level('./db/db_queue');
 let queue = Jobs(db_queue, worker, {
     maxConcurrency: 1,
     maxRetries: 1

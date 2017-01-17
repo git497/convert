@@ -8,7 +8,7 @@ module.exports = {
 };
 
 const level = require('level');
-let db = level('./db_data');
+let db = level('./db/db_data');
 
 function get(key) {
 }
