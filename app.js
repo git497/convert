@@ -21,5 +21,5 @@ if (!fs.existsSync('./db')) {
 }
 
 server.listen(3000, () => {
-    console.log('socket.io server listening at %s', server.url);
+    console.log('server listening at', server.address());
 });
