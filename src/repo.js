@@ -4,11 +4,22 @@
 
 module.exports = {
     get,
-    put
+    put,
+    putObj,
+    getObj
 };
 
 const level = require('level');
 let db = level('./db/data');
+
+function getObj(key) {
+    return get(key)
+        .then(value => JSON.parse(value));
+}
+
+function putObj(key, obj) {
+    return put(key, JSON.stringify(obj));
+}
 
 function get(key) {
 

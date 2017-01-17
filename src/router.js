@@ -27,7 +27,7 @@ module.exports = server => {
 
         logger.info(data);
 
-        return repo.put(`${key}_info`, data)
+        return repo.putObj(`${key}_info`, data)
             .then(() => job.push(data))
             .then(() => res.send(data))
             .catch(err => res.send(400, err));
@@ -36,28 +36,28 @@ module.exports = server => {
     server.get('/files/:id/info', (req, res) => {
 
         let id = req.id;
-        return repo.get(`${id}_info`)
+        return repo.getObj(`${id}_info`)
             .then(value => res.send(value))
             .catch(err => res.send(400, err));
     });
 
     server.get('/files/:id', (req, res) => {
         let id = req.id;
-        return repo.get(`${id}_info`)
+        return repo.getObj(`${id}_info`)
             .then(value => res.send(value.path))
             .catch(err => res.send(400, err));
     });
 
     server.get('/files/:id/convert', (req, res) => {
         let id = req.id;
-        return repo.get(`${id}_convert`)
+        return repo.getObj(`${id}_convert`)
             .then(value => res.send(value))
             .catch(err => res.send(400, err));
     });
 
     server.get('/files/:id/dist', (req, res) => {
         let id = req.id;
-        return repo.get(`${id}_convert`)
+        return repo.getObj(`${id}_convert`)
             .then(value => res.send(value.destFile))
             .catch(err => res.send(400, err));
     });

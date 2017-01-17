@@ -30,14 +30,14 @@ function worker(payload, cb) {
 
     function updateRecord(key, err, filePath) {
         key = `${key}_convert`;
-        return repo.get(key)
+        return repo.getObj(key)
             .then(value => {
                 value.finished = true;
                 value.finishedAt = new Date();
                 value.success = !!err;
                 value.err = err.toString();
                 value.destFile = filePath;
-                return repo.put(key, value);
+                return repo.putObj(key, value);
             });
     }
 }
@@ -61,7 +61,7 @@ function push(data) {
     }
 
     function saveRecord() {
-        return repo.put(`${data.key}_convert`, {
+        return repo.putObj(`${data.key}_convert`, {
             name: data.name,
             path: data.path,
             createdAt: new Date(),
