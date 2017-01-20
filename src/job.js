@@ -54,7 +54,7 @@ function push(data) {
                     console.error('Error pushing work into the queue', err.stack);
                     reject(err);
                 } else {
-                    resolve(key);
+                    resolve(data.key);
                 }
             });
         });
