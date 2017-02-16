@@ -26,7 +26,7 @@ function worker(payload, cb) {
             return updateRecord(payload.key, null, filePath);
         })
         .catch(err => {
-            cb(err);
+            cb(null);
             return updateRecord(payload.key, err, null);
         });
 
