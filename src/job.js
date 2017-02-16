@@ -36,7 +36,7 @@ function worker(payload, cb) {
             .then(value => {
                 value.finished = true;
                 value.finishedAt = new Date();
-                value.success = !!err;
+                value.success = !err;
                 if (err) {
                     value.err = err.toString();
                 }
