@@ -42,7 +42,7 @@ function worker(payload, cb) {
                 }
                 if (!err && filePath && filePath.length) {
                     let destFile = path.resolve('./db/files', key + '.pdf');
-                    fs.copySync(destFile, filePath);
+                    fs.copySync(filePath, destFile);
                     value.destFile = destFile;
                 }
                 return repo.putObj(key, value);
