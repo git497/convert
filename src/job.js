@@ -38,9 +38,11 @@ function worker(payload, cb) {
                 value.finishedAt = new Date();
                 value.success = !!err;
                 value.err = err.toString();
-                let destFile = path.resolve('./db/files', key + '.pdf');
-                fs.copySync(destFile, filePath);
-                value.destFile = destFile;
+                if (!err && filePath && filePath.length) {
+                    let destFile = path.resolve('./db/files', key + '.pdf');
+                    fs.copySync(destFile, filePath);
+                    value.destFile = destFile;
+                }
                 return repo.putObj(key, value);
             });
     }
