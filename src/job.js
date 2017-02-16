@@ -10,6 +10,8 @@ const level = require('level');
 const Jobs = require('level-jobs');
 const convert = require('./convert');
 const repo = require('./repo');
+const path = require('path');
+const fs = require('fs-extra');
 
 let db_queue = level('./db/queue');
 let queue = Jobs(db_queue, worker, {
@@ -36,7 +38,9 @@ function worker(payload, cb) {
                 value.finishedAt = new Date();
                 value.success = !!err;
                 value.err = err.toString();
-                value.destFile = filePath;
+                let destFile = path.resolve('./db/files', key + '.pdf');
+                fs.copySync(destFile, filePath);
+                value.destFile = destFile;
                 return repo.putObj(key, value);
             });
     }
