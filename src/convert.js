@@ -38,7 +38,7 @@ function convertFile(file, options) {
     if (options.format === 'xlsx') {
         params = ['-d', 'spreadsheet'];
     }
-    params = params.concat(['-f', options.to, '-o', options.name, file]);
+    params = params.concat(['-f', options.to, '-o', outputFile, file]);
     logger.info(`unoconv output file ${outputFile}`);
     let unoconv = spawn('unoconv', params);
 
