@@ -37,7 +37,9 @@ function worker(payload, cb) {
                 value.finished = true;
                 value.finishedAt = new Date();
                 value.success = !!err;
-                value.err = err.toString();
+                if (err) {
+                    value.err = err.toString();
+                }
                 if (!err && filePath && filePath.length) {
                     let destFile = path.resolve('./db/files', key + '.pdf');
                     fs.copySync(destFile, filePath);
