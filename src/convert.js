@@ -35,7 +35,7 @@ function convertFile(file, options) {
     options.ext = options.ext || options.to;
     let outputFile = createTempFile(options.ext);
     let params = [];
-    if (options.format === 'spreadsheet') {
+    if (options.format === 'xlsx') {
         params = ['-d', 'spreadsheet'];
     }
     params = params.concat(['-f', options.to, '-o', options.name, file]);
