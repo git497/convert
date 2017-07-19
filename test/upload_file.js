@@ -11,5 +11,5 @@ form.append('ext', 'pdf');
 form.append('file', fs.createReadStream('./app.js'));
 
 form.submit('http://localhost:3000/files', (err, res) => {
-    res.resume();
+  res.resume();
 });

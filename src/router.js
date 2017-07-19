@@ -1,7 +1,6 @@
 /**
  * Created by Dion on 2017/1/16.
  */
-
 const _ = require('lodash');
 const job = require('./job');
 const repo = require('./repo');
@@ -10,55 +9,55 @@ const logger = require('./log');
 
 module.exports = server => {
 
-    server.post('/files', (req, res) => {
+  server.post('/files', (req, res) => {
 
-        let data = req.body;
-        let file = req.files.file;
-        let key = uuid();
+    let data = req.body;
+    let file = req.files.file;
+    let key = uuid();
 
-        _.extend(data, {
-            key: key,
-            createdAt: new Date(),
-            name: file.name,
-            size: file.size,
-            type: file.type,
-            path: file.path
-        });
-
-        logger.info(data);
-
-        return repo.putObj(`${key}_info`, data)
-            .then(() => job.push(data))
-            .then(() => res.send(data))
-            .catch(err => res.send(400, err));
+    _.extend(data, {
+      key: key,
+      createdAt: new Date(),
+      name: file.name,
+      size: file.size,
+      type: file.type,
+      path: file.path
     });
 
-    server.get('/files/:id/info', (req, res) => {
+    logger.info(data);
 
-        let id = req.params.id;
-        return repo.getObj(`${id}_info`)
-            .then(value => res.send(value))
-            .catch(err => res.send(400, err));
-    });
+    return repo.putObj(`${key}_info`, data)
+      .then(() => job.push(data))
+      .then(() => res.send(data))
+      .catch(err => res.send(400, err));
+  });
 
-    server.get('/files/:id', (req, res) => {
-        let id = req.params.id;
-        return repo.getObj(`${id}_info`)
-            .then(value => res.send(value.path))
-            .catch(err => res.send(400, err));
-    });
+  server.get('/files/:id/info', (req, res) => {
 
-    server.get('/files/:id/convert', (req, res) => {
-        let id = req.params.id;
-        return repo.getObj(`${id}_convert`)
-            .then(value => res.send(value))
-            .catch(err => res.send(400, err));
-    });
+    let id = req.params.id;
+    return repo.getObj(`${id}_info`)
+      .then(value => res.send(value))
+      .catch(err => res.send(400, err));
+  });
 
-    server.get('/files/:id/dist', (req, res) => {
-        let id = req.params.id;
-        return repo.getObj(`${id}_convert`)
-            .then(value => res.send(value.destFile))
-            .catch(err => res.send(400, err));
-    });
+  server.get('/files/:id', (req, res) => {
+    let id = req.params.id;
+    return repo.getObj(`${id}_info`)
+      .then(value => res.send(value.path))
+      .catch(err => res.send(400, err));
+  });
+
+  server.get('/files/:id/convert', (req, res) => {
+    let id = req.params.id;
+    return repo.getObj(`${id}_convert`)
+      .then(value => res.send(value))
+      .catch(err => res.send(400, err));
+  });
+
+  server.get('/files/:id/dist', (req, res) => {
+    let id = req.params.id;
+    return repo.getObj(`${id}_convert`)
+      .then(value => res.send(value.destFile))
+      .catch(err => res.send(400, err));
+  });
 };
